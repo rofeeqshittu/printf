@@ -9,9 +9,9 @@
 int _printf(const char *format, ...)
 {
 	int count;
-	void (*handler)(va_list, int *);
 	va_list args;
-	
+	void (*handler)(va_list, int *);
+
 	va_start(args, format);
 	count = 0;
 	while (*format)
