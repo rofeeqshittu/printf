@@ -1,18 +1,44 @@
 #include "main.h"
 
 /**
- * _printf - my own printf function
+ * _printf - a function that produce an output according to a format
+ * @format: Parameter passed
  *
- * Return: void
+ * Return: the number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	int i;
+	int count;
+	void (*handler)(va_list, int *);
 	va_list args;
-
-	i = 0;
+	
 	va_start(args, format);
-	while (format && format[i])
+	count = 0;
+	while (*format)
 	{
+		if (*format == '%')
+		{
+			format++;
+			handler = get_convers_func(format);
+			if (handler != NULL)
+			{
+				handler(args, &count);
+				format++;
+			}
+			else
+			{
+				putchar('%');
+				count++;
+			}
+		}
+		else
+		{
+			putchar(*format);
+			count++;
+		}
+		format++;
+
 	}
+	va_end(args);
+	return (count);
 }

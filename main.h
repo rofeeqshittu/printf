@@ -3,28 +3,32 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdarg.h>
+#include <stddef.h>
 #include <unistd.h>
 
 int _printf(const char *format, ...);
+int _putchar(char c);
+int _strlen(const char *str);
 
 /**
  * struct conv - Conversion structure
  *
- * @conv: The conversion specifier
- * @f: The function associated
+ * @convers_handler: The conversion specifier
+ * @specifier: The specifier
+ * @handler: The function associated
  */
-typedef struct conv
+typedef struct convers_handler
 {
-	char *conv;
-	void (*f)(va_list);
-} conv_t;
-
-/* get_convers_func prototype */
-void (*get_convers_func(char *s));
+	const char *specifier;
+	void (*handler)(va_list args, int *count);
+} conversion_handler;
 
 /* conversion specifier functions */
-void print_char(char *abc);
-void print_str(char *str);
-void p_percent(char *num);
+void handle_char(va_list args, int *count);
+void handle_str(va_list args, int *count);
+void handle_percent(va_list args, int *count);
+
+void (*get_convers_func(const char *s))(va_list args, int *count);
 
 #endif /* MAIN_H */
