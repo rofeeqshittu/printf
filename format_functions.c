@@ -47,7 +47,7 @@ void print_string(va_list args)
 {
 	char *str;
 
-	str = va_arg(args, char);
+	str = va_arg(args, char*);
 	while (*str != '\0')
 	{
 		putchar(*str);
