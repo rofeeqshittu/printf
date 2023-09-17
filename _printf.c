@@ -1,44 +1,49 @@
 #include "main.h"
 
 /**
- * _printf - a function that produce an output according to a format
- * @format: Parameter passed
+ * _printf - My printf function
+ * @format: format
  *
- * Return: the number of characters printed
+ * Return: void
  */
-int _printf(const char *format, ...)
+void _printf(const char *format, ...)
 {
-	int count;
+	int i, found;
 	va_list args;
-	void (*handler)(va_list, int *);
 
 	va_start(args, format);
-	count = 0;
-	while (*format)
+
+	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			handler = get_convers_func(format);
-			if (handler != NULL)
+
+			_formatFunction functions[] = {
+				{print_int, 'd'},
+				{print_string, 's'},
+				{print_char, 'c'},
+				{print_percent, '%'}
+			};
+
+			found = 0;
+			for (i = 0; i < sizeof(functions) / sizeof(functions[0]); i++)
 			{
-				handler(args, &count);
-				format++;
+				if (*format == functions[i].specifier)
+				{
+					functions[i].func(args);
+					found = 1;
+					break;
+				}
 			}
-			else
+			if (!found)
 			{
 				putchar('%');
-				count++;
+				putchar(*format);
 			}
-		}
-		else
-		{
+		} else
 			putchar(*format);
-			count++;
-		}
 		format++;
-
 	}
 	va_end(args);
-	return (count);
 }

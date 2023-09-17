@@ -2,33 +2,25 @@
 #define MAIN_H
 
 #include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
 #include <stddef.h>
-#include <unistd.h>
-
-int _printf(const char *format, ...);
-int _putchar(char c);
-int _strlen(const char *str);
+#include <stdlib.h>
+#include <stdarg.h>
 
 /**
- * struct conv - Conversion structure
- *
- * @convers_handler: The conversion specifier
- * @specifier: The specifier
- * @handler: The function associated
+ * struct _fF - Structure func
+ * @func: function pointer
+ * @specifier: specifier
  */
-typedef struct convers_handler
+typedef struct _fF
 {
-	const char *specifier;
-	void (*handler)(va_list args, int *count);
-} conversion_handler;
+	void (*func)(va_list);
+	char specifier;
+} _formatFunction;
 
-/* conversion specifier functions */
-void handle_char(va_list args, int *count);
-void handle_str(va_list args, int *count);
-void handle_percent(va_list args, int *count);
+void print_int(va_list args);
+void print_string(va_list args);
+void print_char(va_list args);
+void print_percent(va_list args);
 
-void (*get_convers_func(const char *s))(va_list args, int *count);
-
+void _printf(const char *format, ...);
 #endif /* MAIN_H */
