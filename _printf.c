@@ -18,13 +18,13 @@ void _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-
 			_formatFunction functions[] = {
 				{print_int, 'd'},
 				{print_string, 's'},
 				{print_char, 'c'},
 				{print_percent, '%'}
 			};
+
 
 			found = 0;
 			for (i = 0; i < sizeof(functions) / sizeof(functions[0]); i++)

@@ -6,13 +6,14 @@
  *
  * Return: void
  */
-void print_int(va_list args)
+int print_int(va_list args)
 {
-	int num, i;
+	int num, i, count;
 	int isNegative;
 	char buffer[32];
 
 	i = 0;
+	count = 0;
 
 	num = va_arg(args, int);
 	if (num == 0)
@@ -34,7 +35,11 @@ void print_int(va_list args)
 			buffer[i++] = '-';
 	}
 	while (i > 0)
+	{
 		putchar(buffer[--i]);
+		count++;
+	}
+	return (count);
 }
 
 /**
@@ -43,15 +48,18 @@ void print_int(va_list args)
  *
  * Return: void
  */
-void print_string(va_list args)
+int print_string(va_list args)
 {
 	char *str;
+	int count;
 
 	str = va_arg(args, char*);
+	count = 0;
 	while (*str != '\0')
 	{
 		putchar(*str);
 		str++;
+		count++;
 	}
 }
 
@@ -61,12 +69,14 @@ void print_string(va_list args)
  *
  * Return: void
  */
-void print_char(va_list args)
+int print_char(va_list args)
 {
 	char c;
 
 	c = va_arg(args, int);
 	putchar(c);
+
+	return (1);
 }
 
 /**
@@ -75,7 +85,9 @@ void print_char(va_list args)
  *
  * Return: void
  */
-void print_percent(va_list args)
+int print_percent(va_list args)
 {
 	putchar('%');
+
+	return (1);
 }
