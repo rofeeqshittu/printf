@@ -10,28 +10,25 @@ int print_int(va_list args)
 {
 	int num, i, count;
 	int isNegative;
+	unsigned int absNum;
 	char buffer[32];
 
 	i = 0;
 	count = 0;
 
 	num = va_arg(args, int);
-	if (num == 0)
+	absNum = (num < 0) ? -num : num;
+	if (absNum == 0)
 	{
 		buffer[i++] = '0';
 	} else
 	{
-		isNegative = (num < 0);
-		if (isNegative)
-			num = -num;
-
-		while (num != 0)
+		while (absNum != 0)
 		{
-			buffer[i++] = '0' + (num % 10);
-			num /= 10;
+			buffer[i++] = '0' + (absNum % 10);
+			absNum /= 10;
 		}
-
-		if (isNegative)
+		if (num < 0)
 			buffer[i++] = '-';
 	}
 	while (i > 0)
