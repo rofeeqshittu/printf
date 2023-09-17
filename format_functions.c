@@ -9,7 +9,6 @@
 int print_int(va_list args)
 {
 	int num, i, count;
-	int isNegative;
 	unsigned int absNum;
 	char buffer[32];
 
@@ -58,6 +57,8 @@ int print_string(va_list args)
 		str++;
 		count++;
 	}
+
+	return (count);
 }
 
 /**
@@ -82,7 +83,7 @@ int print_char(va_list args)
  *
  * Return: void
  */
-int print_percent(va_list args)
+int print_percent(va_list args __attribute__((unused)))
 {
 	putchar('%');
 
