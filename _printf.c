@@ -6,9 +6,9 @@
  *
  * Return: void
  */
-void _printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
-	int i, found;
+	int i, found, count;
 	int numFunction;
 	va_list args;
 	_formatFunction functions[] = {
@@ -31,7 +31,7 @@ void _printf(const char *format, ...)
 			{
 				if (*format == functions[i].specifier)
 				{
-					functions[i].func(args);
+					count += functions[i].func(args);
 					found = 1;
 					break;
 				}
@@ -40,10 +40,16 @@ void _printf(const char *format, ...)
 			{
 				putchar('%');
 				putchar(*format);
+				count += 2;
 			}
 		} else
+		{
 			putchar(*format);
+			count++;
+		}
 		format++;
 	}
 	va_end(args);
+
+	return (count);
 }
