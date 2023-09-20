@@ -1,7 +1,7 @@
 #include "main.h"
 #include <limits.h>
 
-int main2(void)
+int main(void)
 {
 	_printf("Hello, %s! The answer is %d. The char is %c. the percent is %%. \n", "John", 42, 'A');
 
