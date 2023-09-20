@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 	int numFunction;
 	va_list args;
 	_formatFunction functions[] = {
-		{print_int, 'd'},
+		{print_int, 'd'}, {print_int, 'i'},
 		{print_string, 's'},
 		{print_char, 'c'},
 		{print_percent, '%'}
