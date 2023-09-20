@@ -12,10 +12,13 @@ int _printf(const char *format, ...)
 	int numFunction;
 	va_list args;
 	_formatFunction functions[] = {
+		{print_percent, '%'},
+		{print_char, 'c'}, {print_string, 's'},
 		{print_int, 'd'}, {print_int, 'i'},
-		{print_string, 's'},
-		{print_char, 'c'},
-		{print_percent, '%'}
+		{print_binary, 'b'}, {print_octal, 'o'},
+		{print_unsigned_int, 'u'}, {print_pointer, 'p'},
+		{print_s_hex, 'x'}, {print_l_hex, 'X'},
+		{print_reversed, 'r'}, {print_rot13, 'R'},
 	};
 
 	va_start(args, format);
